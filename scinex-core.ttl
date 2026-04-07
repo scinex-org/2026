@@ -87,6 +87,8 @@ snx:results rdf:type owl:ObjectProperty ;
 #    Data Properties (Literals)
 #################################################################
 
+# --- Paper Metadata ---
+
 snx:objective rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
     rdfs:range xsd:string ;
@@ -111,3 +113,23 @@ dcterms:date rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
     rdfs:range xsd:date ;
     rdfs:label "date" .
+
+# --- Dataset Metadata ---
+
+snx:feature rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Dataset ;
+    rdfs:range xsd:string ;
+    rdfs:comment "List of features/attributes in the dataset." .
+
+snx:label rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Dataset ;
+    rdfs:range xsd:string ;
+    rdfs:comment "The target variable or label used for training/testing." .
+
+snx:datasetName rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Dataset ;
+    rdfs:range xsd:string .
+
+snx:sampleSize rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Dataset ;
+    rdfs:range xsd:integer .
