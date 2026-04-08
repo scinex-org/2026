@@ -9,9 +9,8 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 <https://scinex-org.github.io/2026/scinex-core#> rdf:type owl:Ontology ;
-    dcterms:title "SciNex Core Research Ontology" ;
-    dcterms:description "Core TBox for research data representation based on the SciNex framework." ;
-    owl:versionInfo "1.5" .
+    dcterms:title "SciNex Core Research Ontology (Refined Diagram Update)" ;
+    owl:versionInfo "1.7" .
 
 #################################################################
 #    Classes
@@ -20,11 +19,8 @@
 bibo:AcademicArticle rdf:type owl:Class ;
     rdfs:label "Research Paper" .
 
-snx:DataProcessing rdf:type owl:Class ;
-    rdfs:label "Data Processing" .
-
-snx:Dataset rdf:type owl:Class ;
-    rdfs:label "Dataset" .
+snx:Data rdf:type owl:Class ;
+    rdfs:label "Data" .
 
 snx:Experiment rdf:type owl:Class ;
     rdfs:label "Experiment" .
@@ -32,104 +28,91 @@ snx:Experiment rdf:type owl:Class ;
 snx:Method rdf:type owl:Class ;
     rdfs:label "Method" .
 
-snx:Result rdf:type owl:Class ;
-    rdfs:label "Result" .
+snx:Algorithm rdf:type owl:Class ;
+    rdfs:label "Algorithm" .
 
 #################################################################
 #    Object Properties
 #################################################################
 
 # --- Relationships from bibo:AcademicArticle ---
-
-dcterms:references rdf:type owl:ObjectProperty ;
-    rdfs:domain [ owl:unionOf (bibo:AcademicArticle snx:Method) ] ;
-    rdfs:range bibo:AcademicArticle ;
-    rdfs:label "references" .
-
-snx:processData rdf:type owl:ObjectProperty ;
-    rdfs:domain bibo:AcademicArticle ;
-    rdfs:range snx:DataProcessing ;
-    rdfs:label "processData" .
-
 snx:usesData rdf:type owl:ObjectProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range snx:Dataset ;
-    rdfs:label "usesData" .
+    rdfs:range snx:Data .
 
 snx:conducts rdf:type owl:ObjectProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range snx:Experiment ;
-    rdfs:label "conducts" .
+    rdfs:range snx:Experiment .
 
-# --- Data Flow & Experimentation ---
+# --- Relationships from Data ---
+dcterms:references rdf:type owl:ObjectProperty ;
+    rdfs:domain [ owl:unionOf (snx:Data snx:Method) ] ;
+    rdfs:range bibo:AcademicArticle ;
+    rdfs:comment "Data or Method referencing a Paper (reference)." .
 
+# --- Relationships from Experiment ---
 snx:inputData rdf:type owl:ObjectProperty ;
-    rdfs:domain [ owl:unionOf (snx:DataProcessing snx:Experiment) ] ;
-    rdfs:range snx:Dataset ;
-    rdfs:label "inputData" .
+    rdfs:domain snx:Experiment ;
+    rdfs:range snx:Data .
 
 snx:outputData rdf:type owl:ObjectProperty ;
-    rdfs:domain [ owl:unionOf (snx:DataProcessing snx:Experiment snx:Result) ] ;
-    rdfs:range snx:Dataset ;
-    rdfs:label "outputData" .
+    rdfs:domain snx:Experiment ;
+    rdfs:range snx:Data .
 
 snx:employs rdf:type owl:ObjectProperty ;
     rdfs:domain snx:Experiment ;
-    rdfs:range snx:Method ;
-    rdfs:label "employs" .
+    rdfs:range snx:Method .
 
-snx:results rdf:type owl:ObjectProperty ;
-    rdfs:domain snx:Experiment ;
-    rdfs:range snx:Result ;
-    rdfs:label "results" .
+# --- Relationships from Method ---
+snx:algorithm rdf:type owl:ObjectProperty ;
+    rdfs:domain snx:Method ;
+    rdfs:range snx:Algorithm .
 
 #################################################################
 #    Data Properties (Literals)
 #################################################################
 
-# --- Paper Metadata ---
-
+# --- bibo:AcademicArticle Metadata ---
 snx:objective rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range xsd:string ;
-    rdfs:label "objective" .
+    rdfs:range xsd:string .
 
 dcterms:title rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range xsd:string ;
-    rdfs:label "title" .
+    rdfs:range xsd:string .
 
 dcterms:creator rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range xsd:string ;
-    rdfs:label "creator" .
+    rdfs:range xsd:string .
 
 bibo:doi rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range xsd:string ;
-    rdfs:label "doi" .
+    rdfs:range xsd:string .
 
 dcterms:date rdf:type owl:DatatypeProperty ;
     rdfs:domain bibo:AcademicArticle ;
-    rdfs:range xsd:date ;
-    rdfs:label "date" .
+    rdfs:range xsd:date .
 
-# --- Dataset Metadata ---
+# --- Data Details ---
+rdfs:label rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Data ;
+    rdfs:range xsd:string .
 
 snx:feature rdf:type owl:DatatypeProperty ;
-    rdfs:domain snx:Dataset ;
-    rdfs:range xsd:string ;
-    rdfs:comment "List of features/attributes in the dataset." .
-
-snx:label rdf:type owl:DatatypeProperty ;
-    rdfs:domain snx:Dataset ;
-    rdfs:range xsd:string ;
-    rdfs:comment "The target variable or label used for training/testing." .
-
-snx:datasetName rdf:type owl:DatatypeProperty ;
-    rdfs:domain snx:Dataset ;
+    rdfs:domain snx:Data ;
     rdfs:range xsd:string .
 
 snx:sampleSize rdf:type owl:DatatypeProperty ;
-    rdfs:domain snx:Dataset ;
-    rdfs:range xsd:integer .
+    rdfs:domain snx:Data ;
+    rdfs:range xsd:string .
+
+# --- Experiment Details ---
+snx:matric rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Experiment ;
+    rdfs:range xsd:string ;
+    rdfs:label "metric/matric" .
+
+# --- Method Details ---
+snx:setting rdf:type owl:DatatypeProperty ;
+    rdfs:domain snx:Method ;
+    rdfs:range xsd:string .
