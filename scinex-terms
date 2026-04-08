@@ -1,0 +1,295 @@
+@prefix snxt: <https://scinex-org.github.io/2026/scinex-terms#> .
+@prefix snx: <https://scinex-org.github.io/2026/scinex-core#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+##############################################
+# Taxonomy of Machine Learning Algorithms
+##############################################
+
+### Base Categories ###
+
+snxt:mlAlgorithm rdfs:label "Machine Learning Algorithm" .
+
+snxt:supervisedLearning rdfs:label "Supervised Learning" ;
+    skos:broader snxt:mlAlgorithm .
+
+snxt:unsupervisedLearning rdfs:label "Unsupervised Learning" ;
+    skos:broader snxt:mlAlgorithm .
+
+snxt:reinforcementLearning rdfs:label "Reinforcement Learning" ;
+    skos:broader snxt:mlAlgorithm .
+
+### Supervised Learning Sub-types###
+
+snxt:linearModel rdfs:label "Linear Model" ;
+    skos:broader snxt:supervisedLearning .
+
+snxt:logisticRegression rdfs:label "Logistic Regression" ;
+    skos:broader snxt:linearModel .
+
+snxt:svm rdfs:label "Support Vector Machine (SVM)" ;
+    skos:broader snxt:supervisedLearning .
+
+snxt:treeBasedModel rdfs:label "Tree-based Model" ;
+    skos:broader snxt:supervisedLearning .
+
+snxt:decisionTree rdfs:label "Decision Tree" ;
+    skos:broader snxt:treeBasedModel .
+
+snxt:randomForest rdfs:label "Random Forest" ;
+    skos:broader snxt:treeBasedModel .
+
+snxt:gradientBoosting rdfs:label "Gradient Boosting" ;
+    skos:broader snxt:treeBasedModel .
+
+snxt:xgboost rdfs:label "XGBoost" ;
+    skos:broader snxt:gradientBoosting .
+
+### Unsupervised Learning Sub-types ###
+
+snxt:clusteringAlgorithm rdfs:label "Clustering Algorithm" ;
+    skos:broader snxt:unsupervisedLearning .
+
+snxt:kMeans rdfs:label "K-Means Clustering" ;
+    skos:broader snxt:clusteringAlgorithm .
+
+snxt:hierarchicalClustering rdfs:label "Hierarchical Clustering" ;
+    skos:broader snxt:clusteringAlgorithm .
+
+snxt:dimensionalityReduction rdfs:label "Dimensionality Reduction" ;
+    skos:broader snxt:unsupervisedLearning .
+
+snxt:pca rdfs:label "Principal Component Analysis (PCA)" ;
+    skos:broader snxt:dimensionalityReduction .
+
+snxt:tSNE rdfs:label "t-Distributed Stochastic Neighbor Embedding (t-SNE)" ;
+    skos:broader snxt:dimensionalityReduction .
+
+### Deep Learning Taxonomy ###
+
+snxt:deepLearning rdfs:label "Deep Learning" ;
+    skos:broader snxt:mlAlgorithm .
+
+snxt:ann rdfs:label "Artificial Neural Network (ANN)" ;
+    skos:broader snxt:deepLearning .
+
+snxt:cnn rdfs:label "Convolutional Neural Network (CNN)" ;
+    skos:broader snxt:deepLearning .
+
+snxt:rnn rdfs:label "Recurrent Neural Network (RNN)" ;
+    skos:broader snxt:deepLearning .
+
+snxt:lstm rdfs:label "Long Short-Term Memory (LSTM)" ;
+    skos:broader snxt:rnn .
+
+snxt:transformer rdfs:label "Transformer Architecture" ;
+    skos:broader snxt:deepLearning .
+
+snxt:bert rdfs:label "BERT" ;
+    skos:broader snxt:transformer .
+
+snxt:gpt rdfs:label "Generative Pre-trained Transformer (GPT)" ;
+    skos:broader snxt:transformer .
+
+snxt:gan rdfs:label "Generative Adversarial Network (GAN)" ;
+    skos:broader snxt:deepLearning .
+
+snxt:vae rdfs:label "Variational Autoencoder (VAE)" ;
+    skos:broader snxt:deepLearning .
+
+snxt:diffusionModel rdfs:label "Diffusion Model" ;
+    skos:broader snxt:deepLearning .
+
+
+##############################################
+# Taxonomy of Hyperparameters 
+#############################################
+
+### Optimization Settings ###
+
+snxt:optimizationSetting rdfs:subPropertyOf snx:setting ;
+    rdfs:label "Optimization Setting" .
+
+snxt:lr rdfs:subPropertyOf snxt:optimizationSetting ;
+    rdfs:label "Learning Rate" .
+
+snxt:batchSize rdfs:subPropertyOf snxt:optimizationSetting ;
+    rdfs:label "Batch Size" .
+
+snxt:epochs rdfs:subPropertyOf snxt:optimizationSetting ;
+    rdfs:label "Number of Epochs" .
+
+snxt:optimizer rdfs:subPropertyOf snxt:optimizationSetting ;
+    rdfs:label "Optimizer Type (e.g., Adam, SGD)" .
+
+snxt:momentum rdfs:subPropertyOf snxt:optimizationSetting ;
+    rdfs:label "Momentum" .
+
+snxt:weightDecay rdfs:subPropertyOf snxt:optimizationSetting ;
+    rdfs:label "Weight Decay (L2 Penalty)" .
+
+### Regularization Settings ###
+
+snxt:regularizationSetting rdfs:subPropertyOf snx:setting ;
+    rdfs:label "Regularization Setting" .
+
+snxt:dropout rdfs:subPropertyOf snxt:regularizationSetting ;
+    rdfs:label "Dropout Rate" .
+
+snxt:l1 rdfs:subPropertyOf snxt:regularizationSetting ;
+    rdfs:label "L1 Regularization Coefficient" .
+
+snxt:l2 rdfs:subPropertyOf snxt:regularizationSetting ;
+    rdfs:label "L2 Regularization Coefficient" .
+
+snxt:earlyStopping rdfs:subPropertyOf snxt:regularizationSetting ;
+    rdfs:label "Early Stopping Patience" .
+
+### Architecture Settings ###
+
+snxt:architectureSetting rdfs:subPropertyOf snx:setting ;
+    rdfs:label "Architecture Setting" .
+
+snxt:numLayers rdfs:subPropertyOf snxt:architectureSetting ;
+    rdfs:label "Number of Layers" .
+
+snxt:hiddenDim rdfs:subPropertyOf snxt:architectureSetting ;
+    rdfs:label "Hidden Layer Dimension" .
+
+snxt:activation rdfs:subPropertyOf snxt:architectureSetting ;
+    rdfs:label "Activation Function" .
+
+snxt:numHeads rdfs:subPropertyOf snxt:architectureSetting ;
+    rdfs:label "Number of Attention Heads" .
+
+### Tree-Based Model Settings ###
+
+snxt:treeSetting rdfs:subPropertyOf snx:setting ;
+    rdfs:label "Tree-Based Model Setting" .
+
+snxt:maxDepth rdfs:subPropertyOf snxt:treeSetting ;
+    rdfs:label "Maximum Depth" .
+
+snxt:minSamplesSplit rdfs:subPropertyOf snxt:treeSetting ;
+    rdfs:label "Minimum Samples to Split" .
+
+snxt:nEstimators rdfs:subPropertyOf snxt:treeSetting ;
+    rdfs:label "Number of Estimators" .
+
+snxt:subsample rdfs:subPropertyOf snxt:treeSetting ;
+    rdfs:label "Subsample Ratio" .
+
+
+##############################################
+# Taxonomy of ML Evaluation Metrics 
+##############################################
+
+### Classification Metrics ###
+
+snxt:classificationMetric rdfs:subPropertyOf snx:metric ;
+    rdfs:label "Classification Metric" .
+
+snxt:accuracy rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "Accuracy" .
+
+snxt:precision rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "Precision" .
+
+snxt:recall rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "Recall" .
+
+snxt:f1 rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "F1 Score" .
+
+snxt:auc rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "ROC AUC" .
+
+snxt:logLoss rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "Log Loss" .
+
+snxt:mcc rdfs:subPropertyOf snxt:classificationMetric ;
+    rdfs:label "Matthews Correlation Coefficient" .
+
+### Confusion Matrix Components ###
+
+snxt:confusionMatrixComponent rdfs:subPropertyOf snx:metric ;
+    rdfs:label "Confusion Matrix Component" .
+
+snxt:tp rdfs:subPropertyOf snxt:confusionMatrixComponent ;
+    rdfs:label "True Positive (TP)" .
+
+snxt:tn rdfs:subPropertyOf snxt:confusionMatrixComponent ;
+    rdfs:label "True Negative (TN)" .
+
+snxt:fp rdfs:subPropertyOf snxt:confusionMatrixComponent ;
+    rdfs:label "False Positive (FP)" .
+
+snxt:fn rdfs:subPropertyOf snxt:confusionMatrixComponent ;
+    rdfs:label "False Negative (FN)" .
+
+### Regression Metrics ###
+
+snxt:regressionMetric rdfs:subPropertyOf snx:metric ;
+    rdfs:label "Regression Metric" .
+
+snxt:mse rdfs:subPropertyOf snxt:regressionMetric ;
+    rdfs:label "Mean Squared Error (MSE)" .
+
+snxt:rmse rdfs:subPropertyOf snxt:regressionMetric ;
+    rdfs:label "Root Mean Squared Error (RMSE)" .
+
+snxt:mae rdfs:subPropertyOf snxt:regressionMetric ;
+    rdfs:label "Mean Absolute Error (MAE)" .
+
+snxt:r2 rdfs:subPropertyOf snxt:regressionMetric ;
+    rdfs:label "R-squared (R2) Score" .
+
+snxt:mape rdfs:subPropertyOf snxt:regressionMetric ;
+    rdfs:label "Mean Absolute Percentage Error (MAPE)" .
+
+### Clustering Metrics ###
+
+snxt:clusteringMetric rdfs:subPropertyOf snx:metric ;
+    rdfs:label "Clustering Metric" .
+
+snxt:silhouette rdfs:subPropertyOf snxt:clusteringMetric ;
+    rdfs:label "Silhouette Score" .
+
+snxt:ari rdfs:subPropertyOf snxt:clusteringMetric ;
+    rdfs:label "Adjusted Rand Index (ARI)" .
+
+snxt:nmi rdfs:subPropertyOf snxt:clusteringMetric ;
+    rdfs:label "Normalized Mutual Information (NMI)" .
+
+### Ranking and Retrieval Metrics ###
+
+snxt:rankingMetric rdfs:subPropertyOf snx:metric ;
+    rdfs:label "Ranking and Retrieval Metric" .
+
+snxt:map rdfs:subPropertyOf snxt:rankingMetric ;
+    rdfs:label "Mean Average Precision (mAP)" .
+
+snxt:ndcg rdfs:subPropertyOf snxt:rankingMetric ;
+    rdfs:label "Normalized Discounted Cumulative Gain (NDCG)" .
+
+snxt:pAtK rdfs:subPropertyOf snxt:rankingMetric ;
+    rdfs:label "Precision at K" .
+
+### Generation / NLP Metrics ###
+snxt:generationMetric rdfs:subPropertyOf snx:metric ;
+    rdfs:label "Generation / NLP Metric" .
+
+snxt:bleu rdfs:subPropertyOf snxt:generationMetric ;
+    rdfs:label "BLEU Score" .
+
+snxt:rouge rdfs:subPropertyOf snxt:generationMetric ;
+    rdfs:label "ROUGE Score" .
+
+snxt:meteor rdfs:subPropertyOf snxt:generationMetric ;
+    rdfs:label "METEOR Score" .
+
+snxt:perplexity rdfs:subPropertyOf snxt:generationMetric ;
+    rdfs:label "Perplexity" .
+
