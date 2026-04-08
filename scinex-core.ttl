@@ -107,10 +107,10 @@ snx:sampleSize rdf:type owl:DatatypeProperty ;
     rdfs:range xsd:string .
 
 # --- Experiment Details ---
-snx:matric rdf:type owl:DatatypeProperty ;
+snx:metric rdf:type owl:DatatypeProperty ;
     rdfs:domain snx:Experiment ;
     rdfs:range xsd:string ;
-    rdfs:label "metric/matric" .
+    rdfs:label "evaluation metric" .
 
 # --- Method Details ---
 snx:setting rdf:type owl:DatatypeProperty ;
