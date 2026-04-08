@@ -1,0 +1,60 @@
+@prefix ex: <http://example.org#> .
+@prefix snx: <https://scinex-org.github.io/2026/scinex-core#> .
+@prefix snxt: <https://scinex-org.github.io/2026/scinex-terms#> .
+@prefix bibo: <http://purl.org/ontology/bibo/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+#################################################################
+# Research Paper Instance
+#################################################################
+
+ex:Paper_2026_001 rdf:type bibo:AcademicArticle ;
+    dcterms:title "Comparative Analysis of Tree-Based Models for Tabular Passenger Survival Prediction" ;
+    dcterms:creator "Jane Doe", "John Smith" ;
+    dcterms:date "2026-04-08"^^xsd:date ;
+    bibo:doi "10.1234/scinex.2026.001" ;
+    snx:objective "To evaluate the effectiveness of Random Forest on structured tabular data for binary classification." ;
+    snx:usesData ex:TitanicDataset ;
+    snx:conducts ex:Exp_001 .
+
+#################################################################
+# Data Instance (The Table Data)
+#################################################################
+
+ex:TitanicDataset rdf:type snx:Data ;
+    rdfs:label "Titanic Passenger Dataset" ;
+    snx:sampleSize "891 rows" ;
+    snx:feature "Age", "Sex", "Pclass", "Fare", "Embarked" ;
+    dcterms:references ex:Paper_2026_001 .
+
+#################################################################
+# Experiment Instance
+#################################################################
+
+ex:Exp_001 rdf:type snx:Experiment ;
+    rdfs:label "Random Forest Classification Experiment" ;
+    snx:inputData ex:TitanicDataset ;
+    snx:emplo_001 ex:RF_Method_001 ;
+    # Using snxt terms for metrics
+    snxt:accuracy "0.824" ;
+    snxt:f1 "0.812" ;
+    snxt:auc "0.885" ;
+    snx:outputData ex:PredictionResults .
+
+ex:PredictionResults rdf:type snx:Data ;
+    rdfs:label "Survival Probability Predictions" .
+
+#################################################################
+# Method & Algorithm Instance
+#################################################################
+
+ex:RF_Method_001 rdf:type snx:Method ;
+    rdfs:label "Optimized Random Forest Configuration" ;
+    snx:algorithm snxt:randomForest ;
+    # Using snxt terms for hyperparameters (settings)
+    snxt:nEstimators "100" ;
+    snxt:maxDepth "10" ;
+    snxt:minSamplesSplit "2" ;
+    dcterms:references ex:Paper_2026_001 .
