@@ -36,7 +36,7 @@ ex:TitanicDataset rdf:type snx:Data ;
 ex:Exp_001 rdf:type snx:Experiment ;
     rdfs:label "Random Forest Classification Experiment" ;
     snx:inputData ex:TitanicDataset ;
-    snx:emplo_001 ex:RF_Method_001 ;
+    snx:employs ex:RF_Method_001 ;
     # Using snxt terms for metrics
     snxt:accuracy "0.824" ;
     snxt:f1 "0.812" ;
